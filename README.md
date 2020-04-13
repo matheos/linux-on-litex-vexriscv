@@ -10,14 +10,20 @@ In this repository, we experiment running dedicated digital modules with a bare-
 ![scheme](general.png)
 
 ## Dependencies
+> **Note:** Installation must be performed in order
 ```sh
 $ sudo apt install build-essential device-tree-compiler
 ```
-[migen](https://github.com/m-labs/migen)
+## Download
+```sh
+$ git clone https://github.com/matheos/daphne
+$ cd daphne
+```
+[Migen](https://github.com/m-labs/migen)
 ```sh
 $ sudo pip3 install migen
 ```
-[litex](https://github.com/litex-hub/litex-getting-started)
+[LiteX](https://github.com/litex-hub/litex-getting-started)
 ```sh
 $ wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
 $ chmod +x litex_setup.py
@@ -27,11 +33,17 @@ $ sudo ./litex_setup.py init install
 ```sh
 $ sudo ./litex_setup.py gcc
 ```
+## Set-up configuraion files
+```sh
+$ mv daphne-platforms.py litex-boards/litex-boards/platforms/daphne.py
+$ mv daphne-targets.py litex-boards/litex-boards/targets/daphne.py
+```
 ## Build
 To build the bitstream of you board, run:
 ```sh
 $ ./make.py --board=daphne --build
 ```
+
 
 ### Load the Linux images over Serial
 The board support Serial loading of the Linux images and this is the only way to load them when the board does not have others communications interfaces or storage capability.
