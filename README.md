@@ -10,7 +10,7 @@ In this repository, we experiment running dedicated digital modules with a bare-
 ![scheme](general.png)
 
 ## Dependencies
-> **Note:** Installation must be performed in order
+> **Note:** Installation must be performed in order. Vivado tool cahin must be installed in /opt/Xilinx ... and the binaries correctly added to the PATH variables.
 ```sh
 $ sudo apt install build-essential device-tree-compiler
 ```
