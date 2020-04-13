@@ -27,7 +27,7 @@ class Board:
 class Daphne(Board):
     def __init__(self):
         from litex_boards.targets import daphne
-        Board.__init__(self, daphne.BaseSoC, {"serial", "xadc"})
+        Board.__init__(self, daphne.BaseSoC, "serial")
 
     def load(self):
         from litex.build.xilinx import VivadoProgrammer
