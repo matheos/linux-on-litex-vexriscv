@@ -1,4 +1,4 @@
-h# This file is Copyright (c) 2015-2019 Florent Kermarrec <florent@enjoy-digital.fr>
+# This file is Copyright (c) 2015-2019 Florent Kermarrec <florent@enjoy-digital.fr>
 # License: BSD
 
 from litex.build.generic_platform import *
@@ -8,127 +8,54 @@ from litex.build.xilinx import XilinxPlatform, VivadoProgrammer
 
 _io = [
 
-    ("afedat0", 0, Pins("AE25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 1, Pins("AE26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 2, Pins("AC22"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 3, Pins("AC23"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 4, Pins("AF24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 5, Pins("AF25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 6, Pins("AD25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 7, Pins("AD26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 8, Pins("AE23"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 9, Pins("AF23"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 10, Pins("AD23"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 11, Pins("AD24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 12, Pins("AD21"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 13, Pins("AE21"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 14, Pins("AF19"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat0", 15, Pins("AF20"), IOStandard("DIFF_SSTL18_II")),
-
-    ("afedat1", 0, Pins("AE18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 1, Pins("AF18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 2, Pins("Y18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 3, Pins("AA18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 4, Pins("AE17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 5, Pins("AF17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 6, Pins("AA17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 7, Pins("AB17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 8, Pins("AC17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 9, Pins("AD17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 10, Pins("Y16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 11, Pins("Y17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 12, Pins("AB16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 13, Pins("AC16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 14, Pins("Y15"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat1", 15, Pins("AA15"), IOStandard("DIFF_SSTL18_II")),
-
-    ("afedat2", 0, Pins("U25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 1, Pins("U26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 2, Pins("V26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 3, Pins("W26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 4, Pins("AB26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 5, Pins("AC26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 6, Pins("W25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 7, Pins("Y26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 8, Pins("Y25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 9, Pins("AA25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 10, Pins("V24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 11, Pins("W24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 12, Pins("AA24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 13, Pins("AB25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 14, Pins("AA22"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat2", 15, Pins("AA23"), IOStandard("DIFF_SSTL18_II")),
-
-    ("afedat3", 0, Pins("W20"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 1, Pins("Y20"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 2, Pins("T19"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 3, Pins("U19"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 4, Pins("V19"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 5, Pins("W19"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 6, Pins("V18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 7, Pins("W18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 8, Pins("T14"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 9, Pins("T15"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 10, Pins("T17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 11, Pins("T18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 12, Pins("U15"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 13, Pins("U16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 14, Pins("U14"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat3", 15, Pins("V14"), IOStandard("DIFF_SSTL18_II")),
-
-    ("afedat4", 0, Pins("P15"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 1, Pins("P16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 2, Pins("N16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 3, Pins("N17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 4, Pins("R16"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 5, Pins("R17"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 6, Pins("P18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 7, Pins("N18"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 8, Pins("K25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 9, Pins("K26"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 10, Pins("M20"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 11, Pins("L20"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 12, Pins("L24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 13, Pins("L25"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 14, Pins("M24"), IOStandard("DIFF_SSTL18_II")),
-    ("afedat4", 15, Pins("M25"), IOStandard("DIFF_SSTL18_II")),
-
-    ("spi_afe", 0,
-        Subsignal("sclk", Pins("K15"), IOStandard("LVCMOS33")),
-        Subsignal("miso", Pins("J14"), IOStandard("LVCMOS33")),
-        Subsignal("mosi", Pins("J16"), IOStandard("LVCMOS33")),
-        Subsignal("cs_n", 0 ,Pins("K18"), IOStandard("LVCMOS33")),
-        Subsignal("cs_n", 1 ,Pins("K17"), IOStandard("LVCMOS33")),
-        Subsignal("cs_n", 2 ,Pins("M15"), IOStandard("LVCMOS33")),
-        Subsignal("cs_n", 3 ,Pins("H18"), IOStandard("LVCMOS33")),
+    ("afe", 0,
+        Subsignal("dat", Pins(
+            "AE25 AE26 AC22 AC23 AF24 AF25 AD25 AD26"
+            "AE23 AF23 AD23 AD24 AD21 AE21 AF19 AF20"),
+            IOStandard("LVCMOS15")),
+        Subsignal("cd", Pins("AF5 AF4 AC4 AD4 Y7 AA7 Y6 Y5" 
+            "V8 W8 AA5 AB5 Y8 AA8 AB6 AC6"), 
+            IOStandard("LVCMOS15")),
     ),
 
-    ("afe_cfg", 0,
-        Subsignal("fclkp",Pins("AB21"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("fclkm",Pins("AC21"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkp",Pins("AA20"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkm",Pins("AB20"), IOStandard("DIFF_SSTL18_II")),
+    ("afe", 1,
+        Subsignal("dat", Pins(
+            "AE18 AF18 Y18 AA18 AE17 AF17 AA17 AB17"
+            "AC17 AD17 Y16 Y17 AB16 AC16 Y15 AA15"),
+            IOStandard("LVCMOS15")),
+        Subsignal("cd", Pins("AF5 AF4 AC4 AD4 Y7 AA7 Y6 Y5" 
+            "V8 W8 AA5 AB5 Y8 AA8 AB6 AC6"), 
+            IOStandard("LVCMOS15")),
     ),
 
-    ("afe_cfg", 1,
-        Subsignal("fclkp",Pins("AC19"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("fclkm",Pins("AD19"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkp",Pins("AA19"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkm",Pins("AB19"), IOStandard("DIFF_SSTL18_II")),
+    ("afe", 2,
+        Subsignal("dat", Pins(
+            "U25 U26 V26 W26 AB26 AC26 W25 Y26"
+            "Y25 AA25 V24 W24 AA24 AB25 AA22 AA23"),
+            IOStandard("LVCMOS15")),
+        Subsignal("cd", Pins("AF5 AF4 AC4 AD4 Y7 AA7 Y6 Y5" 
+            "V8 W8 AA5 AB5 Y8 AA8 AB6 AC6"), 
+            IOStandard("LVCMOS15")),
     ),
 
-    ("afe_cfg", 2,
-        Subsignal("fclkp",Pins("Y22"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("fclkm",Pins("Y23"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkp",Pins("U22"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkm",Pins("V22"), IOStandard("DIFF_SSTL18_II")),
+    ("afe", 3,
+        Subsignal("dat", Pins(
+            "W20 Y20 T19 U19 V19 W19 V18 W18"
+            "T14 T15 T17 T18 U15 U16 U14 V14"),
+            IOStandard("LVCMOS15")),
+        Subsignal("cd", Pins("AF5 AF4 AC4 AD4 Y7 AA7 Y6 Y5" 
+            "V8 W8 AA5 AB5 Y8 AA8 AB6 AC6"), 
+            IOStandard("LVCMOS15")),
     ),
 
-    ("afe_cfg", 3,
-        Subsignal("fclkp",Pins("W21"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("fclkm",Pins("Y21"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkp",Pins("U21"), IOStandard("DIFF_SSTL18_II")),
-        Subsignal("dclkm",Pins("V21"), IOStandard("DIFF_SSTL18_II")),
+    ("afe", 4,
+        Subsignal("dat", Pins(
+            "P15 P16 N16 N17 R16 R17 P18 N18"
+            "K25 K26 M20 L20 L24 L25 M24 M25"),
+            IOStandard("LVCMOS15")),
+        Subsignal("cd", Pins("AF5 AF4 AC4 AD4 Y7 AA7 Y6 Y5" 
+            "V8 W8 AA5 AB5 Y8 AA8 AB6 AC6"), 
+            IOStandard("LVCMOS15")),
     ),
 
     ("muxen", 0, Pins("N16"), IOStandard("LVCMOS15")),

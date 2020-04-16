@@ -1,7 +1,7 @@
 # DAPHNE
 DAPHNE (Detector Electronic for Acquiring Photons from Neutrinos) is an instrumentation module for the PDS (Photon Detection System) at DUNE experiment in FERMILAB. DAPHNE is designed to digitize the analog signals coming from the Photon Detection Sensors of the Single Phase in the Cold Electronics side of the TPC. DAPHNE is the first instrumentation module after the TPC interface, on the warm side. 
 
-> **Note:** Tested on Debian 10
+> **Note:** Tested on Debian 10, and the xc7a200t-fbg676-3 package with the pinout presented by the hardware team. 
 
 ## Intro:
 In this repository, we experiment running dedicated digital modules with a bare-bones [LiteX](https://github.com/enjoy-digital/litex) as the SoC builder and special cores written in Migen (LiteADS, LiteDRAM, LiteEth).
@@ -35,8 +35,8 @@ $ sudo ./litex_setup.py gcc
 ```
 ## Set-up configuraion files
 ```sh
-$ mv daphne-platforms.py litex-boards/litex-boards/platforms/daphne.py
-$ mv daphne-targets.py litex-boards/litex-boards/targets/daphne.py
+$ mv daphne-platforms.py litex-boards/litex_boards/platforms/daphne.py
+$ mv daphne-targets.py litex-boards/litex_boards/targets/daphne.py
 ```
 ## Build
 To build the bitstream of you board, run:
