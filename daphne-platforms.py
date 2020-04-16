@@ -230,7 +230,7 @@ _io = [
         Subsignal("clk_n", Pins("F5"), IOStandard("DIFF_SSTL18_II")),
     ),
 
-    ("clk100", 0, Pins("AA4"), IOStandard("LVCMOS15")),
+    ("clk62.5", 0, Pins("AA4"), IOStandard("LVCMOS15")),
 
     ("pll", 0, 
         Subsignal("pll_sclk", Pins("C18"), IOStandard("SSTL18_II")),
@@ -313,84 +313,65 @@ _io = [
         IOStandard("LVCMOS25")
     ),
 
-
-
-
-    # ("eth_clocks", 0,
-    #     Subsignal("tx", Pins("G1")),
-    #     Subsignal("rx", Pins("G2")),
-    #     IOStandard("LVCMOS25")
-    # ),
-    # ("eth", 0,
-    #     Subsignal("rst_n", Pins("U7"), IOStandard("LVCMOS33")),
-    #     Subsignal("int_n", Pins("Y14")),
-    #     Subsignal("mdio", Pins("Y16")),
-    #     Subsignal("mdc", Pins("AA16")),
-    #     Subsignal("rx_ctl", Pins("W10")),
-    #     Subsignal("rx_data", Pins("AB16 AA15 AB15 AB11")),
-    #     Subsignal("tx_ctl", Pins("V10")),
-    #     Subsignal("tx_data", Pins("Y12 W12 W11 Y11")),
-    #     IOStandard("LVCMOS25")
-    # ),
 ]
 
 
 # Platform -----------------------------------------------------------------------------------------
 
-# class Platform(XilinxPlatform):
-#     default_clk_name = "clk100"
-#     default_clk_period = 1e9/100e6
-
-#     def __init__(self):
-#         XilinxPlatform.__init__(self, "xc7a200t-fbg676-3", _io,  toolchain="vivado")
-#         self.toolchain.bitstream_commands = \
-#             ["set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]"]
-#         self.toolchain.additional_commands = \
-#             ["write_cfgmem -force -format bin -interface spix4 -size 16 "
-#              "-loadbit \"up 0x0 {build_name}.bit\" -file {build_name}.bin"]
-#         self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 34]")
-
-
-#     def create_programmer(self):
-#         return VivadoProgrammer(flash_part="n25q128-3.3v-spi-x1_x2_x4")
-
-#     # def do_finalize(self, fragment):
-#     #     XilinxPlatform.do_finalize(self, fragment)
-#     #     try:
-#     #         self.add_period_constraint(self.lookup_request("eth_clocks").rx, 1e9/125e6)
-#     #     except ConstraintError:
-#     #         pass
-#     def load(self):
-#         from litex.build.xilinx import VivadoProgrammer
-#         prog=VivadoProgrammer()
-#         prog.load_bitstream("build/top.bit")
-
 class Platform(XilinxPlatform):
-    default_clk_name = "clk156"
-    default_clk_period = 1e9/156.5e6
+    default_clk_name = "clk62.5"
+    default_clk_period = 1e9/62.5e6
 
     def __init__(self):
         XilinxPlatform.__init__(self, "xc7a200t-fbg676-3", _io,  toolchain="vivado")
-        self.toolchain.bitstream_commands = ["set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]"]
-        self.toolchain.additional_commands = ["write_cfgmem -force -format bin -interface spix4 -size 16 -loadbit \"up 0x0 {build_name}.bit\" -file {build_name}.bin"]
-        self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 33]")
+        self.toolchain.bitstream_commands = \
+            ["set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]"]
+        self.toolchain.additional_commands = \
+            ["write_cfgmem -force -format bin -interface spix4 -size 16 "
+             "-loadbit \"up 0x0 {build_name}.bit\" -file {build_name}.bin"]
         self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 34]")
-        self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 35]")
+
 
     def create_programmer(self):
-        return VivadoProgrammer()
+        return VivadoProgrammer(flash_part="n25q128-3.3v-spi-x1_x2_x4")
 
-    def do_finalize(self, fragment):
-        XilinxPlatform.do_finalize(self, fragment)
-        try:
-            self.add_period_constraint(self.lookup_request("clk200").p, 1e9/200e6)
-        except ConstraintError:
-            pass
-        try:
-            self.add_period_constraint(self.lookup_request("eth_clocks").rx, 1e9/125e6)
-        except ConstraintError:
-            pass
-        try:
-            self.add_period_constraint(self.lookup_request("eth_clocks").tx, 1e9/125e6)
-        except ConstraintError:
-            pass
+    # def do_finalize(self, fragment):
+    #     XilinxPlatform.do_finalize(self, fragment)
+    #     try:
+    #         self.add_period_constraint(self.lookup_request("eth_clocks").rx, 1e9/125e6)
+    #     except ConstraintError:
+    #         pass
+    def load(self):
+        from litex.build.xilinx import VivadoProgrammer
+        prog=VivadoProgrammer()
+        prog.load_bitstream("build/top.bit")
+
+# class Platform(XilinxPlatform):
+#     default_clk_name = "clk156"
+#     default_clk_period = 1e9/156.5e6
+
+#     def __init__(self):
+#         XilinxPlatform.__init__(self, "xc7a200t-fbg676-3", _io,  toolchain="vivado")
+#         self.toolchain.bitstream_commands = ["set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]"]
+#         self.toolchain.additional_commands = ["write_cfgmem -force -format bin -interface spix4 -size 16 -loadbit \"up 0x0 {build_name}.bit\" -file {build_name}.bin"]
+#         self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 33]")
+#         self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 34]")
+#         self.add_platform_command("set_property INTERNAL_VREF 0.750 [get_iobanks 35]")
+
+#     def create_programmer(self):
+#         return VivadoProgrammer()
+
+#     def do_finalize(self, fragment):
+#         XilinxPlatform.do_finalize(self, fragment)
+#         try:
+#             self.add_period_constraint(self.lookup_request("clk200").p, 1e9/200e6)
+#         except ConstraintError:
+#             pass
+#         try:
+#             self.add_period_constraint(self.lookup_request("eth_clocks").rx, 1e9/125e6)
+#         except ConstraintError:
+#             pass
+#         try:
+#             self.add_period_constraint(self.lookup_request("eth_clocks").tx, 1e9/125e6)
+#         except ConstraintError:
+#             pass
