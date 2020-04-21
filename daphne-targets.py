@@ -11,7 +11,7 @@ from litex_boards.platforms import daphne
 from litex.soc.cores.clock import *
 from litex.soc.integration.soc_sdram import *
 from litex.soc.integration.builder import *
-
+from litex.soc.cores import dna, xadc
 from litedram.modules import MT47H128M8
 from litedram.phy import s7ddrphy
 
@@ -53,7 +53,15 @@ class BaseSoC(SoCSDRAM):
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = _CRG(platform, sys_clk_freq)
 
-        # DDR3 SDRAM -------------------------------------------------------------------------------
+        # DNA --------------------------------------------------------------------------------------
+        self.submodules.dna = dna.DNA()
+        self.add_csr("dna")
+
+        # XADC -------------------------------------------------------------------------------------
+        self.submodules.xadc = xadc.XADC()
+        self.add_csr("xadc")
+
+        # DDR2 SDRAM -------------------------------------------------------------------------------
         if not self.integrated_main_ram_size:
             self.submodules.ddrphy = s7ddrphy.A7DDRPHY(platform.request("ddram"),
                 memtype      = "DDR2",
@@ -64,6 +72,7 @@ class BaseSoC(SoCSDRAM):
             self.register_sdram(self.ddrphy,
                 geom_settings   = sdram_module.geom_settings,
                 timing_settings = sdram_module.timing_settings)
+        # SPI 
 
 # EthernetSoC --------------------------------------------------------------------------------------
 
