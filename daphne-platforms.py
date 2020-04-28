@@ -1,4 +1,4 @@
-h# This file is Copyright (c) 2015-2019 Florent Kermarrec <florent@enjoy-digital.fr>
+# This file is Copyright (c) 2015-2019 Florent Kermarrec <florent@enjoy-digital.fr>
 # License: BSD
 
 from litex.build.generic_platform import *
@@ -7,14 +7,6 @@ from litex.build.xilinx import XilinxPlatform, VivadoProgrammer
 # IOs ----------------------------------------------------------------------------------------------
 
 _io = [
-
-
-
-
-
-
-
-
 
     ("spi_afe", 0,
         Subsignal("sclk", Pins("K15"), IOStandard("LVCMOS33")),
@@ -45,6 +37,7 @@ _io = [
         Subsignal("dclkp",Pins("AA20"), IOStandard("DIFF_SSTL18_II")),
         Subsignal("dclkm",Pins("AB20"), IOStandard("DIFF_SSTL18_II")),
     ),
+    
     ("spi_afe", 1,
         Subsignal("sclk", Pins("K15"), IOStandard("LVCMOS33")),
         Subsignal("miso", Pins("J14"), IOStandard("LVCMOS33")),
@@ -178,7 +171,13 @@ _io = [
     ("muxen", 9, Pins("R25"), IOStandard("LVCMOS15")),
     ("refin_mux", 0, Pins("K25"), IOStandard("LVCMOS15")),
     ("ss_cfg_dat", 0, Pins("R15"), IOStandard("LVCMOS15")),
- 
+
+    ("xadc", 0,
+        Subsignal("adc_p", Pins("C16 A18 B17")),
+        Subsignal("adc_n", Pins("B16 A19 A17")),
+        Subsignal("v_p", Pins("N12")),
+        Subsignal("v_n", Pins("P11")),
+    ),
     
     ("gain_cs", 0, Pins("N26"), IOStandard("LVCMOS15")),
     ("bias_cs", 0, Pins("M26"), IOStandard("LVCMOS15")),
@@ -265,7 +264,7 @@ _io = [
         Subsignal("clk_n", Pins("F5"), IOStandard("DIFF_SSTL18_II")),
     ),
 
-    ("clk62.5", 0, Pins("AA4"), IOStandard("LVCMOS15")),
+    ("clk625", 0, Pins("AA4"), IOStandard("LVCMOS15")),
 
     ("pll", 0, 
         Subsignal("pll_sclk", Pins("C18"), IOStandard("SSTL18_II")),
@@ -354,7 +353,7 @@ _io = [
 # Platform -----------------------------------------------------------------------------------------
 
 class Platform(XilinxPlatform):
-    default_clk_name = "clk62.5"
+    default_clk_name = "clk625"
     default_clk_period = 1e9/62.5e6
 
     def __init__(self):

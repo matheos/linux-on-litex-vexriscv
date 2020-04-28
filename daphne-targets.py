@@ -25,26 +25,26 @@ class _CRG(Module):
         self.clock_domains.cd_sys       = ClockDomain()
         self.clock_domains.cd_sys4x     = ClockDomain(reset_less=True)
         self.clock_domains.cd_sys4x_dqs = ClockDomain(reset_less=True)
-        self.clock_domains.cd_clk200    = ClockDomain()
-        self.clock_domains.cd_clk100    = ClockDomain()
+        self.clock_domains.cd_clk250    = ClockDomain()
+        self.clock_domains.cd_clk625    = ClockDomain()
 
         # # #
 
-        self.submodules.pll = pll = S7MMCM(speedgrade=-1)
+        self.submodules.pll = pll = S7MMCM(speedgrade=-3)
         self.comb += pll.reset.eq(~platform.request("cpu_reset"))
-        pll.register_clkin(platform.request("clk100"), 100e6)
+        pll.register_clkin(platform.request("clk625"), 62.5e6)
         pll.create_clkout(self.cd_sys,       sys_clk_freq)
         pll.create_clkout(self.cd_sys4x,     4*sys_clk_freq)
         pll.create_clkout(self.cd_sys4x_dqs, 4*sys_clk_freq, phase=90)
-        pll.create_clkout(self.cd_clk200,    200e6)
-        pll.create_clkout(self.cd_clk100,    100e6)
+        pll.create_clkout(self.cd_clk250,    250e6)
+        pll.create_clkout(self.cd_clk625,    62.5e6)
 
-        self.submodules.idelayctrl = S7IDELAYCTRL(self.cd_clk200)
+        self.submodules.idelayctrl = S7IDELAYCTRL(self.cd_clk250)
 
 # BaseSoC ------------------------------------------------------------------------------------------
 
 class BaseSoC(SoCSDRAM):
-    def __init__(self, sys_clk_freq=int(100e6), **kwargs):
+    def __init__(self, sys_clk_freq=int(62.5e6), **kwargs):
         platform = daphne.Platform()
 
         # SoCSDRAM ---------------------------------------------------------------------------------
@@ -58,8 +58,8 @@ class BaseSoC(SoCSDRAM):
         self.add_csr("dna")
 
         # XADC -------------------------------------------------------------------------------------
-        self.submodules.xadc = xadc.XADC()
-        self.add_csr("xadc")
+     #   self.submodules.xadc = xadc.XADC()
+     #   self.add_csr("xadc")
 
         # DDR2 SDRAM -------------------------------------------------------------------------------
         if not self.integrated_main_ram_size:
@@ -72,7 +72,17 @@ class BaseSoC(SoCSDRAM):
             self.register_sdram(self.ddrphy,
                 geom_settings   = sdram_module.geom_settings,
                 timing_settings = sdram_module.timing_settings)
-        # SPI 
+
+        # AFEs -------------------------------------------------------------------------------------
+        # SFPs -------------------------------------------------------------------------------------
+        # Offset -----------------------------------------------------------------------------------
+        # TRIM -------------------------------------------------------------------------------------
+        # Sled -------------------------------------------------------------------------------------
+        # STM  -------------------------------------------------------------------------------------
+        # TRIM -------------------------------------------------------------------------------------
+
+
+
 
 # EthernetSoC --------------------------------------------------------------------------------------
 
@@ -88,7 +98,7 @@ class EthernetSoC(BaseSoC):
         # Ethernet ---------------------------------------------------------------------------------
         # phy
         self.submodules.ethphy = LiteEthPHYRGMII(
-            clock_pads = self.platform.request("eth_clocks"),
+            clock_pads = self.platform.request("lemo"),
             pads       = self.platform.request("eth"))
         self.add_csr("ethphy")
         # mac
