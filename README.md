@@ -46,6 +46,20 @@ $ ./make.py --board=daphne --build
 
 
 ### Load the Linux images over Serial
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/asciinema-player.css" />
+</head>
+<body>
+  <asciinema-player src="/334107.cast" cols="253" rows="74"></asciinema-player>
+  ...
+  <script src="/asciinema-player.js"></script>
+</body>
+</html>
+
+
+
 The board support Serial loading of the Linux images and this is the only way to load them when the board does not have others communications interfaces or storage capability.
 
 To load the Linux images over Serial, use the [lxterm](https://github.com/enjoy-digital/litex/blob/master/litex/tools/litex_term.py) terminal/tool provided by LiteX and run:
