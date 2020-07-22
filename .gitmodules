@@ -1,0 +1,3 @@
+[submodule "linux-on-litex-vexriscv"]
+	path = linux-on-litex-vexriscv
+	url = git@github.com:litex-hub/linux-on-litex-vexriscv.git
