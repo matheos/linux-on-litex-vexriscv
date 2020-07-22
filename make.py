@@ -5,7 +5,7 @@ import os
 
 from litex.soc.integration.builder import Builder
 
-from soc_linux import SoCLinux, video_resolutions
+from vexriscv.soc_linux import SoCLinux, video_resolutions
 
 kB = 1024
 
